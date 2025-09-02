@@ -7,8 +7,13 @@ const pool = new Pool({
     database: process.env.DB_DATABASE,
     password: process.env.DB_PASS,
     port: process.env.DB_PORT,
-    ssl: { rejectUnauthorized: false }
-});
+    ssl: {
+    rejectUnauthorized: false,
+    require: true
+  },
+  statement_timeout: 10000, 
+  idle_in_transaction_session_timeout: 10000
+})
 
 pool.connect()
     .then(client => {
