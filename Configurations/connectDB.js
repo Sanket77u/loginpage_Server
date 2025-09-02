@@ -1,5 +1,9 @@
 require('dotenv').config();
 const { Pool } = require('pg');
+const dns = require('dns');
+
+// Force IPv4 (avoid ENETUNREACH on Render)
+dns.setDefaultResultOrder('ipv4first');
 
 const pool = new Pool({
     host: process.env.DB_HOST,
